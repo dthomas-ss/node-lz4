@@ -32,27 +32,28 @@
     "node": ">= 10.13"
   },
   "dependencies": {
-    "buffer": "^5.2.1",
+    "buffer": "^6.0.3",
     "cuint": "^0.2.2",
-    "node-addon-api": "^3.2.1",
+    "node-addon-api": "^6.1.0",
     "xxhashjs": "^0.2.2"
   },
   "devDependencies": {
-    "benchmark": "^1.0.0",
-    "browserify": "^16.2.3",
-    "jasmine-core": "^2.2.0",
-    "karma": "^0.12.31",
-    "karma-chrome-launcher": "^0.1.7",
-    "karma-cli": "0.0.4",
-    "karma-firefox-launcher": "^0.1.4",
-    "karma-jasmine": "^0.3.5",
-    "karma-mocha": "^0.1.10",
-    "minify": "^4.1.1",
-    "mocha": "^2.2.4"
+    "benchmark": "^2.1.4",
+    "browserify": "^17.0.0",
+    "jasmine-core": "^5.0.0",
+    "karma": "^6.4.2",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-cli": "2.0.0",
+    "karma-firefox-launcher": "^2.1.2",
+    "karma-jasmine": "^5.1.0",
+    "karma-mocha": "^2.0.1",
+    "minify": "^9.2.0",
+    "mocha": "^10.2.0"
   },
   "scripts": {
     "test": "mocha",
     "install": "node-gyp rebuild",
-    "prepublish": "./build.sh"
+    "benchmark": "node ./benchmark/bench.js",
+    "prepublish": "npx browserify  -r ./lib/utils-js.js:./utils -r buffer -r xxhashjs -r ./lib/lz4l.js:lz4 -o build/lz4.js lib/lz4l.js && minify build/lz4.js > build/lz4.min.js"
   }
 }
