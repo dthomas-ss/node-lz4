@@ -54,6 +54,7 @@
     "test": "mocha",
     "install": "node-gyp rebuild",
     "benchmark": "node ./benchmark/bench.js",
-    "prepublish": "npx browserify  -r ./lib/utils-js.js:./utils -r buffer -r xxhashjs -r ./lib/lz4l.js:lz4 -o build/lz4.js lib/lz4l.js && minify build/lz4.js > build/lz4.min.js"
+    "initSubmodules": "git submodule update --init --recursive",
+    "prepublish": "npm run initSubmodules && npx browserify  -r ./lib/utils-js.js:./utils -r buffer -r xxhashjs -r ./lib/lz4l.js:lz4 -o build/lz4.js lib/lz4l.js && minify build/lz4.js > build/lz4.min.js"
   }
 }
